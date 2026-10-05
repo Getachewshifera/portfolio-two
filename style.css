@@ -202,7 +202,6 @@ textarea {
   .loader-mark i { animation: none; }
   .loader-track span { animation-duration: 3.6s; }
 }
-
 /* Header and navigation */
 .site-header {
   position: sticky;
