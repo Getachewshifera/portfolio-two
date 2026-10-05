@@ -125,11 +125,18 @@ const emailJsIsConfigured = [
   emailJsServiceId,
   emailJsTemplateId,
   emailJsPublicKey,
-].every((value) => value && !value.startsWith("YOUR_EMAILJS_")) &&
-  typeof emailjs !== "undefined";
+].every((value) => value && !value.startsWith("YOUR_EMAILJS_"));
 
-if (emailJsIsConfigured) {
-  emailjs.init({ publicKey: emailJsPublicKey });
+function loadEmailJs() {
+  if (typeof emailjs !== "undefined") return Promise.resolve();
+
+  return new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
+    script.onload = resolve;
+    script.onerror = () => reject(new Error("Email service could not be loaded"));
+    document.head.append(script);
+  });
 }
 
 function getFieldError(field) {
@@ -202,6 +209,8 @@ contactForm.addEventListener("submit", async (event) => {
   formStatus.classList.remove("success");
 
   try {
+    await loadEmailJs();
+    emailjs.init({ publicKey: emailJsPublicKey });
     await emailjs.send(emailJsServiceId, emailJsTemplateId, templateParams);
 
     formStatus.textContent = "Message sent successfully. Thank you for reaching out.";
