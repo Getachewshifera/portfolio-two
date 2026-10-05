@@ -1,6 +1,13 @@
 // Theme toggle and saved preference
 document.querySelector("#current-year").textContent = new Date().getFullYear();
 
+const siteLoader = document.querySelector("#site-loader");
+window.setTimeout(() => {
+  siteLoader.classList.add("is-hidden");
+  document.body.classList.remove("is-loading");
+  window.setTimeout(() => siteLoader.remove(), 450);
+}, 3550);
+
 const rootElement = document.documentElement;
 const themeToggle = document.querySelector(".theme-toggle");
 const themeIcon = themeToggle.querySelector("span");

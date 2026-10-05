@@ -98,6 +98,110 @@ textarea {
 .skip-link:focus {
   transform: translateY(0);
 }
+.is-loading {
+  overflow: hidden;
+}
+.site-loader {
+  position: fixed;
+  z-index: 2000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: var(--page);
+  color: var(--text);
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.4s ease,
+    visibility 0.4s ease;
+}
+.site-loader.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.loader-content {
+  width: min(280px, calc(100% - 48px));
+  text-align: center;
+}
+.loader-mark {
+  position: relative;
+  display: grid;
+  width: 76px;
+  height: 76px;
+  place-items: center;
+  margin: 0 auto 28px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--accent-strong);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+}
+.loader-mark span + span {
+  margin-left: 17px;
+  margin-top: -36px;
+  color: var(--text);
+}
+.loader-mark i {
+  position: absolute;
+  top: -4px;
+  left: 34px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--highlight);
+  transform-origin: 4px 42px;
+  animation: loader-orbit 1.8s linear infinite;
+}
+.loader-kicker,
+.loader-meta {
+  color: var(--text-faint);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+.loader-kicker {
+  margin: 0 0 3px;
+}
+.loader-title {
+  margin: 0 0 23px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 25px;
+  font-weight: 600;
+}
+.loader-track {
+  height: 3px;
+  overflow: hidden;
+  background: var(--line);
+}
+.loader-track span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(90deg, #07f31a 0%, #fcdd09 50%, #da121a 100%);
+  animation: loader-progress 3.6s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+.loader-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 9px;
+  letter-spacing: 0.8px;
+}
+@keyframes loader-progress {
+  to { transform: scaleX(1); }
+}
+@keyframes loader-orbit {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-loader { transition-duration: 0.01ms; }
+  .loader-mark i { animation: none; }
+  .loader-track span { animation-duration: 3.6s; }
+}
 
 /* Header and navigation */
 .site-header {
