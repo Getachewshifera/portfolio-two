@@ -44,7 +44,7 @@ html {
 body {
   margin: 0;
   background-color: var(--page);
-  background-image: linear-gradient(var(--backdrop-tint), var(--backdrop-tint)), url("images/background.png");
+  background-image: linear-gradient(var(--backdrop-tint), var(--backdrop-tint));
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
